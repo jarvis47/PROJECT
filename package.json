@@ -5,12 +5,12 @@
   "description": "Example project from an angular.io guide.",
   "scripts": {
     "lint": "tslint ./src/**/*.ts -t verbose",
-    "start": "node server.js",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "test": "ng test",
-    "build": "ng build --prod",
+    "build": "ng build",
     "e2e": "ng e2e",
     "ng": "ng",
-    "postinstall": "ng build -aot -prod"
+    "heroku-postbuild": "ng build --prod"
   },
   "engines": {
     "node": "~10.9.0",
