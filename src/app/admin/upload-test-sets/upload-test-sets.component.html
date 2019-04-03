@@ -1,0 +1,108 @@
+<div class="jumbotron">
+  <h3>
+    Upload MPT Sets Here
+  </h3>
+  <hr>
+    <form [formGroup]="uploadTestPaperSetForm" (ngSubmit)="onSubmit()">
+      <table class="table table-borderless table-sm w-auto">
+              <tr>
+                  <td>
+                      Location
+                  </td>
+                  <td>:</td>
+                  <td>
+                  <b> {{adminLocation}}   </b>
+                  </td>
+              </tr> 
+              <tr>  
+              <td>
+                Sub Location:
+              </td>
+              <td>
+                :
+              </td>
+              <td>
+                  <select formControlName="selectedSubLocation" class="form-control-sm" (change)="onSelectingSubLocation($event.target.value)">
+                      <option value="0">--select subLocation--</option>
+                      <option *ngFor="let subLocs of adminSubLocation">{{subLocs}}</option>
+                 </select>
+              </td>
+            </tr>
+        <tr>
+          <td>Batch Name</td>
+          <td>:</td>
+          <td>
+            <select class="form-control-sm" formControlName="selectedBatch" required>
+              <option value="0"></option>
+              <option *ngFor="let b of batches" [ngValue]="b">{{b.batchName}}</option>
+            </select>
+          </td>
+
+        </tr>
+
+        <tr>
+          <td>Set Number</td>
+          <td>:</td>
+          <td>
+            <select class="form-control-sm" formControlName="selectedSetNumber" required>
+              <option value="0"></option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Module Name</td>
+          <td>:</td>
+          <td>
+            <select class="form-control-sm" formControlName="selectedModule" required>
+              <option value="0"></option>
+              <option value="mod1">Module 1</option>
+              <option value="mod2">Module 2</option>
+              <option value="mod3">Module 3</option>
+              <option value="mod4">Module 4</option>
+              <option value="mod5">Module 5</option>
+              <option value="mod6">Module 6</option>
+            </select>
+          </td>
+
+        </tr>
+        <tr>
+          <td>Test Type</td>
+          <td>:</td>
+          <td>
+            <input type="radio" checked="checked" value="test" formControlName="testType" required>Test&nbsp;&nbsp;&nbsp;
+            <input type="radio" value="retest" formControlName="testType" required>Retest
+          </td>
+        </tr>
+        <tr>
+            <td>Test Paper Set</td>
+            <td>:</td>
+            <td>
+              <input formControlName="selectedTestPaperSetFile" type="file" accept=".pdf" (change)="onFileSelect($event)" #fileInput required>
+            </td>
+          </tr>
+        <tr>
+          <td>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-success btn-sm" [disabled]="!uploadTestPaperSetForm.valid">Upload MPT</button>
+          </td>
+          <td>
+            <br>
+            <br>
+            <button type="reset" class="btn btn-danger btn-sm">Reset</button>
+          </td>
+        </tr>
+
+      </table>
+    </form>
+  </div>

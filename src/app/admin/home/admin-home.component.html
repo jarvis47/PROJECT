@@ -1,0 +1,44 @@
+<header class="header">
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>MPT Assignment Master</h3>
+        </div>
+        <div class="col-sm-6 text-right text-white">
+            <div class="row">
+                <div class="col-sm-12">Welcome {{adminUserName}}</div>
+                <div class="col-sm-12">
+                    <button class="btn btn-default btn-sm text-white" (click)="logOut()"><b><u>Logout</u></b></button>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    
+</header>
+<ul>
+                <li>
+                    <a routerLink='/admin-home/admin-dashboard' [routerLinkActive]="['is-active']">Dashboard</a>
+                </li>
+                <li>
+                    <a routerLink='/admin-home/add-new-batch' [routerLinkActive]="['is-active']">Add New Batch</a>
+                </li>
+                <li>
+                        <a routerLink='/admin-home/view-candidates' [routerLinkActive]="['is-active']">Edit Candidates</a>
+                 </li>
+                <li>
+                    <a routerLink='/admin-home/upload-test-sets' [routerLinkActive]="['is-active']">Upload MPTs</a>
+                </li>
+                <li>
+                        <a routerLink='/admin-home/view-test-sets' [routerLinkActive]="['is-active']">View Uploaded MPTs</a>
+                </li>
+                <li>
+                    <a routerLink='/admin-home/assign-test-sets' [routerLinkActive]="['is-active']">Assign MPTs</a>
+                </li>
+                <li>
+                        <a routerLink='/admin-home/view-assigned-mpt-sets' [routerLinkActive]="['is-active']">Edit Assigned MPTs</a>
+                    </li>
+                <li *ngIf="adminRole=='SUPER-ADMIN'">
+                    <a routerLink='/admin-home/add-admin' [routerLinkActive]="['is-active']">Add Admin</a>
+                </li>
+            </ul>
+<router-outlet></router-outlet>

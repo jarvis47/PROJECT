@@ -1,0 +1,139 @@
+<div  style="background-color: #d1d1d1" >
+<h3>Assign MPTs Here</h3>
+<hr>
+<form [formGroup]="assignMptSetForm" (ngSubmit)="onSubmit()">
+  <table class="table table-sm table-borderless">
+    <tr>
+      <td>
+        Location <br>
+        <b>{{adminLocation}}</b>
+      </td>
+      <td>
+          Sub Locations <br>
+          <select formControlName="selectedSubLocation" class="form-control-sm" (change)="onSelectingSubLocation($event.target.value)">
+            <option value="0">--select subLocation--</option>
+            <option *ngFor="let subLocs of adminSubLocation">{{subLocs}}</option>
+          </select>
+          <div *ngIf="batchData">
+                <div *ngIf="batchData.length==0" class="text-danger">There is no batches added for the selected location</div>
+            </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Date of Test <br>
+        <input class="form-control-sm" formControlName="selectedDateOfTest" type="date" required>
+      </td>
+      <td>
+        Time of Test <br>
+        <input class="form-control-sm" type="time" formControlName="selectedTimeOfTest" required>
+      </td>
+      <td colspan="2">Batch Name <br>
+        <select class="form-control-sm" formControlName="selectedBatchId" (change)="onSelectingBatch($event.target.value)"  required>
+          <option value="0">--select batch here--</option>
+          <option *ngFor="let b of batchData" [ngValue]="b" [value]="b._id">{{b.batchName}}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+        <td>
+            Duration <br>
+            <select class="form-control-sm" formControlName="selectedHrs" required>
+              <option value="01">1 Hr</option>
+              <option value="02">2 Hr</option>
+              <option value="03">3 Hr</option>
+              <option value="04">4 Hr</option>
+            </select>
+            :
+            <select class="form-control-sm" formControlName="selectedMinutes" required>
+              <option *ngFor="let minute of minutes" [value]="minute">{{minute}} Min.</option>
+            </select>
+          </td>
+          <td>
+              Category <br>
+              <select class="form-control-sm" formControlName="selectedTestType" required (change)="onSelectingTestType()">
+                <option [value]="0">--select test type--</option>
+                <option>Test</option>
+                <option>Retest</option>
+              </select>
+            </td>
+    
+      <td>Module <br>
+        <select class="form-control-sm" formControlName="selectedModule" required (change)="onSelectModule()"> 
+          <option value="0">--select module--</option>
+          <option *ngFor="let mpt of 	modules">{{mpt}}</option>
+        </select>
+      </td>
+        <td>
+          <br>
+          <button type="submit" class="btn btn-success" [disabled]="!assignMptSetForm.valid">view candidates</button>
+        </td>
+    </tr>
+  </table>
+</form>
+</div>
+  <div *ngIf="mptSets">
+  <div *ngIf="mptSets.length>0" class="content">
+    <div class="header" id="myHeader">
+      MPT Set :
+      <select class="form-control-sm"  (change)="onSelectingMPT($event.target.value)">
+        <option value="0">--Select Test Paper Sets--</option>
+        <option *ngFor="let set of mptSets" [ngValue]="set" [value]="set._id">{{set.testPaperSetName}}</option>
+      </select>
+    </div>
+    <table class="table table-striped table-bordered table-sm">
+      <tr>
+        <th>
+          Employee ID
+        </th>
+        <th>
+          UserID
+        </th>
+        <th>
+          User Name
+        </th>
+        <th>
+          IP Address
+        </th>
+        <th>
+          Action
+        </th>
+      </tr>
+      <tr *ngFor="let candidate of candidates">
+        <td>{{candidate.employeeId}}</td>
+        <td>
+          {{ candidate.userId}}
+        </td>
+        <td>
+          {{candidate.fullName}}
+        </td>
+        <td>
+          {{candidate.ipAddress}}
+        </td>
+        <td>
+          <div *ngIf="!assignButtonClicked(candidate)">
+            <button type="button" class="btn btn-info btn-sm" (click)="onTestAssign(candidate)">Assign Test</button>
+          </div>
+          <div *ngIf="assignButtonClicked(candidate)">
+            <div *ngIf="editingCandidateMpt!=candidate">
+              {{getSetName(candidate)}}
+              <button type="button" class="btn btn-warning btn-sm" (click)="editMptSet(candidate,getSetName(candidate))">Edit</button>
+            </div>
+            <div *ngIf="editingCandidateMpt==candidate">
+              <select class="form-control-sm" required (change)="onEditingMPT(candidate,$event.target.value)">
+                <option value="0"></option>
+                <option *ngFor="let set of mptSets" [ngValue]="set" [value]="set._id">{{set.testPaperSetName}}</option>
+              </select>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <button type="button" (click)="finishAssignment()" class="btn btn-success btn-sm" id="publish">Submit Assignment</button>
+  </div>
+</div>
+  <div *ngIf="mptSets!=undefined" class="content">
+    <div *ngIf="mptSets.length==0">
+        <h5>NO MPTS available for selected test category, module and batch</h5>
+    </div>
+  </div>

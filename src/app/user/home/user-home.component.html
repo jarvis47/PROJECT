@@ -1,0 +1,8 @@
+<div *ngIf="TestNotFound">
+    <h3>Test Not Found</h3>
+</div>
+<div [ngClass]="main_div" *ngIf="!TestNotFound">
+<router-outlet></router-outlet>
+</div>
+user home called
+

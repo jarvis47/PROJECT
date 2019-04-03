@@ -1,0 +1,47 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+  }
+  
+  li {
+    float: left;
+  }
+  a{
+    color: #666;
+  }
+  li a {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  
+  li a:hover:not(.active) {
+    background-color:  #d3d4d5;
+    color: #666;
+  }
+  
+  li a.active {
+    color: white;
+    background-color: #4CAF50;
+  }
+  .is-active
+  {
+    background-color:  #0f6674;
+    color: white
+  }
+  .header {
+    overflow: hidden;
+    background-color: #0f6674;
+    padding: 20px 10px;
+    
+  }
+  .header h3{
+    color:white;
+  }
+  
+ 

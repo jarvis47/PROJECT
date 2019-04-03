@@ -1,0 +1,9 @@
+p {
+    font-family: Lato;
+  }
+  @media print 
+  {
+     .main{
+        visibility: hidden;
+     }
+  }

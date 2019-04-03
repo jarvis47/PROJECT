@@ -1,0 +1,124 @@
+<div class="header">
+  <h3>Uploaded MPTs</h3>
+  <hr>
+    <form [formGroup]="viewMptsFormGroup" (ngSubmit)="onSubmit()">
+      <table>
+          <tr>
+              <td style="padding:15px">
+                  Location<br>
+                  <b>
+                  {{adminLocation}}
+                </b>
+                </td>
+                <td style="padding:15px">
+                  Sub Locations <br>
+                  <select formControlName="selectedSubLocation" class="form-control-sm" (change)="onSelectingSubLocation($event.target.value)">
+                    <option value="0">--select subLocation--</option>
+                    <option *ngFor="let subLocs of adminSubLocation">{{subLocs}}</option>
+               </select>
+            <td>
+              <td *ngIf="batches">
+                <br>
+                <div *ngIf="batches.length==0" class="alert alert-danger">
+                  No Batches Added For The Selected Sub Location
+                </div>
+              </td>
+          <td style="padding:15px" *ngIf="batches">
+            <div  *ngIf="batches.length>0" >
+                Category
+                <br>
+                <select class="form-control-sm" formControlName="selectedTestType" required>
+                  <option>test</option>
+                  <option>retest</option>
+                </select>
+              </div>
+              </td>
+           
+          <td style="padding:15px" *ngIf="batches">
+            <div  *ngIf="batches.length>0" >
+                Module
+                <br>
+                <select class="form-control-sm" formControlName="selectedModule" required>
+                  <option value="MOD1">Module 1</option>
+                  <option value="MOD2">Module 2</option>
+                  <option value="MOD3">Module 3</option>
+                  <option value="MOD4">Module 4</option>
+                  <option value="MOD5">Module 5</option>
+                  <option value="MOD6">Module 6</option>
+                </select>
+            </div>
+            </td>
+          <td style="padding:15px" *ngIf="batches">
+            <div  *ngIf="batches.length>0" >
+                Batch Name
+                <br>
+                <select class="form-control-sm" formControlName="selectedBatchName" required>
+                  <option *ngFor="let batch of batches" [ngValue]="batch">{{batch.batchName}}</option>
+                </select>
+              </div>
+              </td>
+              <td style="padding:15px" *ngIf="batches">    
+                <div  *ngIf="batches.length>0">
+                    <br>
+                    <button class="btn btn-primary" type="submit">View</button>
+                </div>  
+              </td>
+          
+        </tr>
+      </table>
+    </form>
+</div>
+<div *ngIf="paperSets && paperSets.length>0">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Location</th>
+        <th>Sub Location</th>
+        <th>Uploaded By</th>
+        <th>Module</th>
+        <th>MPT Name </th>
+        <th>Set No.</th>
+        <th>upload Date</th>
+        <th>upload Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sets of paperSets">
+        <td>
+          {{adminLocation}}
+        </td>
+        <td>
+          {{selectingSubLocation}}
+        </td>
+        <td>
+          {{sets.uploadedBy}}
+        </td>
+        <td>
+          {{sets.module}}
+        </td>
+        <td>
+          {{sets.testPaperSetName}}
+        </td>
+        <td>
+          {{sets.setNumber}}
+        </td>
+        <td>
+          {{sets.dateOfUpload}}
+        </td>
+        <td>
+          {{sets.timeOfUpload}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="paperSets!=undefined && batches!=undefined">
+    <div class="jumbotron" *ngIf="paperSets.length==0">
+      <h2 class="text-danger">No MPT Sets Uploaded For The Selected Fields....</h2>
+        </div>      
+</div>
+  <div class="jumbotron" *ngIf="paperSets==null">
+    <h3 class="text-info">
+      View Uploaded MPT Sets Here....
+    </h3>
+    </div>

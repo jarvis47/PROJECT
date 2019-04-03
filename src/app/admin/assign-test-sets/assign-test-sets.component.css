@@ -1,0 +1,22 @@
+th, td { 
+    padding: 20px; 
+    background-color:none; 
+} 
+.content {
+    padding: 16px;
+  }
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  
+  .sticky + .content {
+    padding-top: 102px;
+  }
+  .header {
+    padding: 10px 16px;
+    background:#17a2b8;
+    border-bottom-color:1px solid black;
+    color: white;
+  }

@@ -1,0 +1,73 @@
+<div class="jumbotron">
+<h3>Add New Batches</h3>
+<hr>
+<form [formGroup]="addNewBatchForm" (ngSubmit)="onSubmit()">
+<table class="table table-borderless table-sm">
+  <tr>
+    <td>Location</td>
+    <td>:</td>
+    <td>
+       <b>{{adminLocation}}</b>
+    </td>
+    <td>Sub-Location</td>
+    <td>:</td>
+    <td>
+        <select class="form-control-sm" formControlName="selectedSubLocation" required (change)="onSelectionSubLocation($event.target.value)">
+          <option value="0">--select subLocation--</option>  
+          <option *ngFor="let subLocs of adminSubLocation">{{subLocs}}</option>
+        </select>
+    </td>
+  </tr>
+  <tr>
+      <td>Batch Id</td>
+      <td>:</td>
+      <td>
+        <input class="form-control-sm" type="text" id="bId" formControlName="batchId" required  (change)="onSelectionBatchId($event.target.value)">
+      </td>
+      <td>Lot Name</td>
+      <td>:</td>
+      <td>
+        <input class="form-control-sm" type="text" formControlName="lotName" required>
+      </td>
+     
+    </tr>
+    <tr>
+        <td>Batch Name</td>
+      <td>:</td>
+      <td>
+        <input class="form-control-sm" id="bName" type="text" formControlName="batchName" required>
+      </td>
+      </tr>
+    <tr>
+      <td>On-Boarding Date</td>
+      <td>:</td>
+      <td>
+        <input class="form-control-sm" type="date" formControlName="onBoardingDate" required >
+      </td>
+      <td>Batch End Date</td>
+      <td>:</td>
+      <td>
+        <input class="form-control-sm" type="date" formControlName="endDate" required>
+      </td>
+    </tr>
+      <tr>
+          <td>Student Details Excel</td>
+          <td>:</td>
+          <td>
+             <input class="form-control-sm" formControlName="selectedStudentFile" type="file" (change)="onFileSelect($event)" accept=".xls,.xlsx" required>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td style="text-align: center" colspan="6">
+            <br>
+            <br>
+            <br>
+              <button type="submit" class="btn btn-success" [disabled]="!addNewBatchForm.valid">Add Batch</button>
+            &nbsp;&nbsp;&nbsp;
+              <button type="reset" class="btn btn-danger">Reset</button>
+          </td>
+        </tr>
+</table>
+</form>
+</div>

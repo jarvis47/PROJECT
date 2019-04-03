@@ -1,0 +1,14 @@
+p {
+    font-family: Lato;
+  }
+  @media print 
+  {
+     .main{
+        visibility: hidden;
+     }
+  }
+  .main-div
+  {
+    filter: blur(20px);
+  -webkit-filter: blur(20px);
+  }

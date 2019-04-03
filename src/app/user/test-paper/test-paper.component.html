@@ -1,0 +1,12 @@
+<div class="main" *ngIf="urlOfImage">
+  <p>
+    Start editing to see some magic happen :)
+  </p>
+  <img [src]="urlOfImage" height="400px" width="700px">
+</div>
+<div *ngIf="!urlOfImage">
+  <h1>Test Paper For You have not assigned</h1>
+</div>
+{{ip_address_session}}
+{{testPaperSet}}
+

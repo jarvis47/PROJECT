@@ -1,0 +1,103 @@
+<div class="row" style="background-color: #f3f3f3">
+        <div class="col-md-6">
+                <div class="jumbotron">
+                    <h3>
+                        Add new Admin Here 
+                    </h3>
+                    <hr>
+                        <form [formGroup]="addAdminForm" (ngSubmit)="onSubmit()">
+                            <table>
+                                <tr>
+                                    <td>Full name</td>
+                                    <td>
+                                        <input type="text" class="form-control-sm" required formControlName="fullName" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Employee ID</td>
+                                    <td>
+                                        <input type="text" class="form-control-sm" formControlName="employeeID" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>User ID</td>
+                                    <td>
+                                        <input type="text" class="form-control-sm" formControlName="userID" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Password</td>
+                                    <td>
+                                        <input type="password" class="form-control-sm" formControlName="password" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Role</td>
+                                    <td>
+                                        <input type="radio" formControlName="roleOfAdmin" value="ADMIN" required>Admin<br>
+                                        <input type="radio" formControlName="roleOfAdmin" value="SUPER-ADMIN" required>Super Admin
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Location</td>
+                                    <td>
+                                        <select formControlName="selectedLocation" required class="form-control-sm" (change)="onSelectingLocation($event.target.value)">
+                                                <option value="0">-----------</option>
+                                            <option *ngFor="let location of locations">
+                                                {{location.location}}
+                                            </option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="locationSelected">
+                                    <td>Sub Location</td>
+                                    <td>&nbsp;&nbsp;
+                                         <span  *ngFor="let subLocation of subLocationArray">
+                                            <input type="checkbox"   [value]="subLocation" (change)="onCheckSubLocation($event.target.value)">{{subLocation}}&nbsp;&nbsp;&nbsp;&nbsp;
+                                         </span>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <br>
+                            <button type="submit" [disabled]="!addAdminForm.valid" class="btn btn-success btn-sm" >Add</button>
+                            <button type="reset" class="btn btn-danger btn-sm">Reset</button>
+                            <br>
+                            <br>
+                            <div *ngIf="!addAdminForm.valid"  class="p-1 mb-1 bg-danger text-white">
+                                All the fields are mandatory
+                            </div>
+                        </form>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <h3>Available Admins</h3>
+            <hr>
+            <div *ngIf="admins">
+                <div *ngIf="admins.length>0">
+                    <table class="table table-sm table-bordered">
+                        <tr>
+                            <th>EMPID</th>
+                            <th>Name</th>
+                            <th>Role</th>
+                            <th>Location</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr *ngFor="let admin of admins">
+                            <td>{{admin._id}}</td>
+                            <td>{{admin.name}}</td>
+                            <td>{{admin.role}}</td>
+                            <td>{{admin.location}}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" type="button" (click)="onRemoveAdmin()">Remove</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div *ngIf="admins.length==0">
+                    no admin has been added
+                </div>  
+            </div>
+        </div>
+</div>

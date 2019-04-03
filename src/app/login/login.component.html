@@ -1,0 +1,29 @@
+<header class="header">
+      <h3>MPT Assignment Master</h3>
+</header>
+
+  <div class="wrapper fadeInDown" style="margin-top:7%">
+      <div id="formContent">
+        <!-- Tabs Titles -->
+    
+        <!-- Icon -->
+        <br>
+        <div class="fadeIn first">
+          <h4>Admin Login</h4>
+          <br>
+        </div>
+    
+        <!-- Login Form -->
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <input type="text" id="login" class="fadeIn second" formControlName="username" placeholder="login">
+          <input type="password" id="password" class="fadeIn third" formControlName="password" placeholder="password">
+          <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+    
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+          <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+    
+      </div>
+    </div>
